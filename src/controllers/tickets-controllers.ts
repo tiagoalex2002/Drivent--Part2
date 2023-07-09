@@ -4,10 +4,14 @@ import { AuthenticatedRequest } from '@/middlewares';
 import ticketServices from '@/services/tickets-services.ts';
 import { TicketDatabase } from '@/protocols';
 
-export async function getTypes(req: Request, res: Response) {
+export async function getTypes(req: AuthenticatedRequest, res: Response) {
   try {
     const action = await ticketServices.getTypes();
-    return res.status(httpStatus.OK).send(action);
+    if (!action[0]) {
+      return res.status(200).send([]);
+    } else {
+      return res.status(200).send(action);
+    }
   } catch (err) {
     console.log(err.message);
   }

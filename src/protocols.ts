@@ -54,3 +54,16 @@ export type TicketDatabase = {
 export type TypeId = {
   ticketTypeId: number;
 };
+
+export type CardData = {
+  issuer: string;
+  number: number;
+  name: string;
+  expirationDate: Date;
+  cvv: number;
+};
+
+export type CreatePayment = {
+  ticketId: number;
+  cardData: CardData;
+};
