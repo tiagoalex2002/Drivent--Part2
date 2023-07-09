@@ -44,3 +44,13 @@ export type RequestError = {
   name: string;
   message: string;
 };
+
+export type TicketDatabase = {
+  id: number;
+  enrollmentId: number;
+  ticketTypeId: number;
+};
+
+export type TypeId = {
+  ticketTypeId: number;
+};
