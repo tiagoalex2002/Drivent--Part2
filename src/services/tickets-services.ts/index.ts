@@ -38,11 +38,21 @@ export async function createTicket(ticket: TicketDatabase) {
   }
 }
 
+export async function getTypeById(Id: number) {
+  return await ticketRepository.getTypeById(Id);
+}
+
+export async function getTicketById(Id: number) {
+  return await ticketRepository.getTicketById(Id);
+}
+
 const ticketServices = {
   getTypes,
   getUserTickets,
   updateTicket,
   createTicket,
+  getTypeById,
+  getTicketById,
 };
 
 export default ticketServices;
