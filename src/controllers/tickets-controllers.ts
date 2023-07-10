@@ -13,7 +13,7 @@ export async function getTypes(req: AuthenticatedRequest, res: Response) {
       return res.status(200).send(action);
     }
   } catch (err) {
-    console.log(err.message);
+    return res.sendStatus(500);
   }
 }
 
@@ -28,7 +28,7 @@ export async function getUserTicket(req: AuthenticatedRequest, res: Response) {
       return res.status(200).send(ticket);
     }
   } catch (err) {
-    console.log(err.message);
+    return res.sendStatus(500);
   }
 }
 
@@ -44,6 +44,6 @@ export async function createTicket(req: AuthenticatedRequest, res: Response) {
       return res.sendStatus(201);
     }
   } catch (err) {
-    console.log(err.message);
+    return res.sendStatus(500);
   }
 }

@@ -20,7 +20,7 @@ export async function payment(req: AuthenticatedRequest, res: Response) {
       return res.status(200).send(action);
     }
   } catch (err) {
-    console.log(err.message);
+    return res.sendStatus(500);
   }
 }
 
@@ -36,6 +36,6 @@ export async function getPayment(req: AuthenticatedRequest, res: Response) {
       return res.status(200).send(action);
     }
   } catch (err) {
-    console.log(err.message);
+    return res.sendStatus(500);
   }
 }
