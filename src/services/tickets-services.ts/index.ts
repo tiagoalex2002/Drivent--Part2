@@ -12,7 +12,7 @@ export async function getUserTickets(enrollment: number) {
   if (!user) {
     return 404;
   } else {
-    const tickets = await ticketRepository.getUserTickets(enrollment);
+    const tickets = await ticketRepository.getUserTickets(user.id);
     if (!tickets) {
       return 404;
     } else {
@@ -38,12 +38,9 @@ export async function createTicket(ticketId: number, userId: number) {
     if (!ticketId) {
       return 400;
     } else {
-      const ticket = {
-        id: 1,
-        ticketTypeId: ticketId,
-        enrollmentId: userId,
-      };
-      return await ticketRepository.createTicket(ticket);
+      await ticketRepository.createTicket(ticketId, user.id);
+      const tickets = await getUserTickets(userId);
+      return tickets;
     }
   }
 }

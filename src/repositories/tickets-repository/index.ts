@@ -15,9 +15,9 @@ export async function getUserTickets(enrollment: number) {
   return ticket;
 }
 
-export async function createTicket(ticket: TicketDatabase) {
+export async function createTicket(ticketId: number, enrollId: number) {
   const action = await prisma.ticket.create({
-    data: { ticketTypeId: ticket.ticketTypeId, enrollmentId: ticket.enrollmentId, status: TicketStatus.RESERVED },
+    data: { ticketTypeId: ticketId, enrollmentId: enrollId, status: TicketStatus.RESERVED },
   });
   return action;
 }
