@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://postgres:top_secret@drivent-postgres-test:5433/drivent_test?schema=public"
 }
 
 model User {
