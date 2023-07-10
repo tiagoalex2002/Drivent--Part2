@@ -2,7 +2,7 @@ import { Response, Request } from 'express';
 import httpStatus from 'http-status';
 import { AuthenticatedRequest } from '@/middlewares';
 import ticketServices from '@/services/tickets-services.ts';
-import { TicketDatabase } from '@/protocols';
+import { TicketDatabase, TypeId } from '@/protocols';
 
 export async function getTypes(req: AuthenticatedRequest, res: Response) {
   try {
@@ -29,10 +29,11 @@ export async function getUserTicket(req: AuthenticatedRequest, res: Response) {
 }
 
 export async function createTicket(req: AuthenticatedRequest, res: Response) {
-  const ticket = req.body as TicketDatabase;
+  const ticket = req.body as TypeId;
+  const userId = Number(req.userId);
 
   try {
-    const result = await ticketServices.createTicket(ticket);
+    const result = await ticketServices.createTicket(ticket.ticketTypeId, userId);
     if (result === 400) {
       return res.sendStatus(400);
     } else {

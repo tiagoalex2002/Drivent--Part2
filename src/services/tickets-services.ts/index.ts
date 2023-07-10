@@ -30,11 +30,21 @@ export async function updateTicket(Id: number) {
   }
 }
 
-export async function createTicket(ticket: TicketDatabase) {
-  if (!ticket.ticketTypeId) {
-    return 400;
+export async function createTicket(ticketId: number, userId: number) {
+  const user = await enrollmentRepository.findWithUserId(userId);
+  if (!user) {
+    throw notFoundError();
   } else {
-    return await ticketRepository.createTicket(ticket);
+    if (!ticketId) {
+      return 400;
+    } else {
+      const ticket = {
+        id: 1,
+        ticketTypeId: ticketId,
+        enrollmentId: userId,
+      };
+      return await ticketRepository.createTicket(ticket);
+    }
   }
 }
 
