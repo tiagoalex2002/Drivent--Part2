@@ -40,6 +40,8 @@ export async function createTicket(req: AuthenticatedRequest, res: Response) {
     const result = await ticketServices.createTicket(ticket.ticketTypeId, userId);
     if (result === 400) {
       return res.sendStatus(400);
+    } else if (result === 404) {
+      return res.sendStatus(404);
     } else {
       return res.sendStatus(201);
     }

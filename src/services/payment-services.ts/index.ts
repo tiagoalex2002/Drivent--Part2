@@ -19,7 +19,7 @@ export async function payment(inf: CreatePayment, price: number) {
 
 export async function getPayment(Id: number) {
   if (!Id) {
-    return 404;
+    return 400;
   } else {
     const ticket = await ticketRepository.getTicketById(Id);
     if (!ticket) {

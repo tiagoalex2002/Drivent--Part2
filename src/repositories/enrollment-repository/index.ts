@@ -11,7 +11,7 @@ async function findWithAddressByUserId(userId: number) {
 }
 
 async function findWithUserId(userId: number) {
-  return prisma.enrollment.findFirst({
+  return await prisma.enrollment.findFirst({
     where: { userId },
   });
 }

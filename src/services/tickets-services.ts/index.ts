@@ -33,7 +33,7 @@ export async function updateTicket(Id: number) {
 export async function createTicket(ticketId: number, userId: number) {
   const user = await enrollmentRepository.findWithUserId(userId);
   if (!user) {
-    throw notFoundError();
+    return 404;
   } else {
     if (!ticketId) {
       return 400;
