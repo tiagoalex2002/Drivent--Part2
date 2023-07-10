@@ -6,6 +6,10 @@ export async function getTypes() {
   return await prisma.ticketType.findMany();
 }
 
+export async function getTypeById(Id: number) {
+  return await prisma.ticketType.findUnique({ where: { id: Id } });
+}
+
 export async function getUserTickets(enrollment: number) {
   const ticket = await prisma.ticket.findFirst({ where: { enrollmentId: enrollment } });
   return ticket;
@@ -23,11 +27,18 @@ export async function updateTicket(Id: number) {
   return action;
 }
 
+export async function getTicketById(Id: number) {
+  const ticket = await prisma.ticket.findUnique({ where: { id: Id } });
+  return ticket;
+}
+
 const ticketRepository = {
   getTypes,
   getUserTickets,
   createTicket,
   updateTicket,
+  getTicketById,
+  getTypeById,
 };
 
 export default ticketRepository;
