@@ -39,7 +39,7 @@ export async function createTicket(ticketId: number, userId: number) {
       return 400;
     } else {
       await ticketRepository.createTicket(ticketId, user.id);
-      const tickets = await getUserTickets(userId);
+      const tickets = await ticketRepository.getUserTickets(user.id);
       return tickets;
     }
   }

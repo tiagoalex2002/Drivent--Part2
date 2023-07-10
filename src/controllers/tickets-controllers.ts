@@ -43,7 +43,7 @@ export async function createTicket(req: AuthenticatedRequest, res: Response) {
     } else if (result === 404) {
       return res.sendStatus(404);
     } else {
-      return res.sendStatus(201);
+      return res.status(201).send(result);
     }
   } catch (err) {
     return res.sendStatus(500);
