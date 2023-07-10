@@ -50,7 +50,12 @@ export async function getTypeById(Id: number) {
 }
 
 export async function getTicketById(Id: number) {
-  return await ticketRepository.getTicketById(Id);
+  const action = await ticketRepository.getTicketById(Id);
+  if (!action) {
+    return 404;
+  } else {
+    return action;
+  }
 }
 
 const ticketServices = {

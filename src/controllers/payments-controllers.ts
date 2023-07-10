@@ -10,6 +10,9 @@ export async function payment(req: AuthenticatedRequest, res: Response) {
 
   try {
     const ticket = await ticketServices.getTicketById(payInfo.ticketId);
+    if (ticket === 404) {
+      return res.sendStatus(404);
+    }
     const type = await ticketServices.getTypeById(ticket.ticketTypeId);
     const action = await paymentServices.payment(payInfo, type.price, id);
 

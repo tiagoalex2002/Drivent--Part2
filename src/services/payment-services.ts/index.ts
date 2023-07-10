@@ -4,7 +4,7 @@ import ticketRepository from '@/repositories/tickets-repository';
 import enrollmentRepository from '@/repositories/enrollment-repository';
 
 export async function payment(inf: CreatePayment, price: number, userId: number) {
-  if (!inf.ticketId || inf.cardData) {
+  if (!inf.ticketId || !inf.cardData) {
     return 400;
   } else {
     const ticket = await ticketRepository.getTicketById(inf.ticketId);
