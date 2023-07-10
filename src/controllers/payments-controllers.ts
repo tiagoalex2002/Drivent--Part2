@@ -14,6 +14,8 @@ export async function payment(req: AuthenticatedRequest, res: Response) {
 
     if (action === 400) {
       return res.sendStatus(400);
+    } else if (action === 404) {
+      return res.sendStatus(404);
     } else {
       return res.status(200).send(action);
     }
@@ -28,7 +30,11 @@ export async function getPayment(req: AuthenticatedRequest, res: Response) {
 
   try {
     const action = await paymentServices.getPayment(ticket);
-    return res.status(200).send(action);
+    if (action === 404) {
+      return res.sendStatus(404);
+    } else {
+      return res.status(200).send(action);
+    }
   } catch (err) {
     console.log(err.message);
   }

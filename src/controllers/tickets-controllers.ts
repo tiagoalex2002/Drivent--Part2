@@ -22,7 +22,11 @@ export async function getUserTicket(req: AuthenticatedRequest, res: Response) {
 
   try {
     const ticket = await ticketServices.getUserTickets(id);
-    return res.status(200).send(ticket);
+    if (ticket === 404) {
+      return res.sendStatus(404);
+    } else {
+      return res.status(200).send(ticket);
+    }
   } catch (err) {
     console.log(err.message);
   }

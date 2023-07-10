@@ -11,7 +11,7 @@ export async function getTypeById(Id: number) {
 }
 
 export async function getUserTickets(enrollment: number) {
-  const ticket = await prisma.ticket.findFirst({ where: { enrollmentId: enrollment } });
+  const ticket = await prisma.ticket.findFirst({ include: { TicketType: true }, where: { enrollmentId: enrollment } });
   return ticket;
 }
 

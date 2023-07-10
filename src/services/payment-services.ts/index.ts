@@ -1,5 +1,4 @@
 import paymentRepository from '@/repositories/payments-repository';
-import { notFoundError } from '@/errors';
 import { CreatePayment } from '@/protocols';
 import ticketRepository from '@/repositories/tickets-repository';
 
@@ -9,7 +8,7 @@ export async function payment(inf: CreatePayment, price: number) {
   } else {
     const ticket = await ticketRepository.getTicketById(inf.ticketId);
     if (!ticket) {
-      throw notFoundError();
+      return 404;
     } else {
       const action = await paymentRepository.payment(inf, price);
       await ticketRepository.updateTicket(inf.ticketId);
@@ -20,11 +19,11 @@ export async function payment(inf: CreatePayment, price: number) {
 
 export async function getPayment(Id: number) {
   if (!Id) {
-    throw notFoundError();
+    return 404;
   } else {
     const ticket = await ticketRepository.getTicketById(Id);
     if (!ticket) {
-      throw notFoundError();
+      return 404;
     } else {
       const action = await paymentRepository.getPayment(Id);
       return action;

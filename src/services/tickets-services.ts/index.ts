@@ -10,11 +10,11 @@ export async function getTypes() {
 export async function getUserTickets(enrollment: number) {
   const user = await enrollmentRepository.findWithUserId(enrollment);
   if (!user) {
-    throw notFoundError();
+    return 404;
   } else {
     const tickets = await ticketRepository.getUserTickets(enrollment);
     if (!tickets) {
-      throw notFoundError();
+      return 404;
     } else {
       return tickets;
     }
